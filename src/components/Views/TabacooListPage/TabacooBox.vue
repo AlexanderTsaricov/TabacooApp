@@ -2,7 +2,7 @@
     <li class="tabacooListBox_li">
         <p class="tabacooListBox_tabacooName">Tabacoo name: <span class="tabacooListBox_tabacooName__span">{{ item.name }}</span></p>
         <p class="tabacooListBox_brandName">Brand name: <span class="tabacooListBox_tabacooName__span">{{ item.brand }}</span></p>
-        <button @click="del()">Delete</button>
+        <button @click="del()">DELETE</button>
     </li>
 </template>
 
