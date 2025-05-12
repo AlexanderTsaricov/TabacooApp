@@ -11,8 +11,6 @@
         </div>
         <button class="addTabacooBox_submit" @click="handleAdd">Submit</button>
     </form>
-    <input type="file" accept=".xls,.xlsx" class="loadTabacooFromXlsButton" @click="handleFileUpload">
-    <p>Проверка: input должен быть выше</p>
 </template>
 
 
@@ -91,7 +89,6 @@
 
 <script>
 import { addDataToTable } from '../../Storage/addDataToTable';
-import loadDataFromXls  from '../../Storage/loadDatafromxls';
 
 export default {
   data() {
@@ -121,18 +118,6 @@ export default {
       } catch (error) {
         console.error("Ошибка добавления данных:", error);
         alert("Произошла ошибка при добавлении данных.");
-      }
-    },
-    async handleFileUpload(event) {
-      const file = event.target.files[0];
-      if (file) {
-        try {
-          const data = await loadDataFromXls(file);
-          this.jsonData = data;
-          console.log('Данные из файла:', data);
-        } catch (error) {
-          console.error('Ошибка при загрузке файла:', error);
-        }
       }
     },
   },

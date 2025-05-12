@@ -13,11 +13,11 @@
     const sendToConsoleSelectedBrands = async () => {
         if (selectedBrands.value.length == 0) {
             const tabacoo = await getRandomTabacooFromTable();
-            const tabacooName = tabacoo['name'];
+            const tabacooName = 'Name: ' + tabacoo['name'] + ' | Brand: ' + tabacoo['brand'];
             writeTabacooToRandomBox(tabacooName);
         } else {
             const tabacoo = await getRandomTabacooFromTable(selectedBrands.value);
-            const tabacooName = tabacoo['name'];
+            const tabacooName = 'Name: ' + tabacoo['name'] + ' | Brand: ' + tabacoo['brand'];
             writeTabacooToRandomBox(tabacooName);
         }
     }
