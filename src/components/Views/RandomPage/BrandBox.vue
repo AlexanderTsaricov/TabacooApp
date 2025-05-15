@@ -1,17 +1,19 @@
 <template>
-    <div class="stranghtTabacooBox_selectBox">
-            <label class="stranghtTabacooBox_label">
-                {{brand}}
-                <input 
-                    type="checkbox" 
-                    :name="brand" 
-                    :id="brand" 
-                    class="stranghtTabacooBox_checkbox"
-                    @change="handleChange($event)"
-                >
-            </label>
-        </div>
+  <div class="stranghtTabacooBox_selectBox">
+    <input
+      type="checkbox"
+      :name="brand"
+      :id="brand"
+      class="stranghtTabacooBox_checkbox"
+      @change="handleChange($event)"
+    />
+    <label class="stranghtTabacooBox_label" :for="brand">
+      {{ brand }}
+    </label>
+  </div>
 </template>
+
+
 
 <script>
     export default {
@@ -32,24 +34,23 @@
 <style scoped>
 
     .stranghtTabacooBox_label {
-        font-size: 16px; /* Размер шрифта текста */
-        color: #e0e0e0; /* Цвет текста */
-        display: flex;
-        align-items: center; /* Выравнивание текста и чекбокса */
-        gap: 10px; /* Расстояние между текстом и чекбоксом */
-        cursor: pointer; /* Указатель при наведении */
+        font-size: 16px;
+        color: #e0e0e0;
+        cursor: pointer;
+        transition: color 0.3s ease, font-weight 0.3s ease;
+        user-select: none;
+        display: inline-block;
     }
 
+    /* Полностью скрыть стандартный чекбокс */
     .stranghtTabacooBox_checkbox {
-        width: 20px; /* Ширина чекбокса */
-        height: 20px; /* Высота чекбокса */
-        accent-color: #ffcc00; /* Цвет галочки */
-        border: 2px solid #ffcc00; /* Граница чекбокса */
-        border-radius: 4px; /* Закруглённые углы чекбокса */
-        cursor: pointer; /* Указатель при наведении */
+        display: none;
     }
 
-    .stranghtTabacooBox_checkbox:checked {
-        transform: none; /* Убираем увеличение при выборе */
+    /* Изменяем стиль текста, когда чекбокс активен */
+    .stranghtTabacooBox_checkbox:checked + .stranghtTabacooBox_label {
+        color: #ffcc00;
+        font-weight: bold;
     }
+
 </style>
