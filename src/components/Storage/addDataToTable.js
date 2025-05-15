@@ -1,24 +1,7 @@
-// src/components/Storage/addDataToTable.js
-
-/**
- * Обёртка для выполнения SQL-запроса в базе данных.
- * Всегда резолвит объектом { response: boolean, result?, error? }.
- */
-function requestToBD(db, sql, params = []) {
-    return new Promise(resolve => {
-      db.transaction(tx => {
-        tx.executeSql(
-          sql,
-          params,
-          (_, res) => resolve({ response: true, result: res }),
-          (_, err) => resolve({ response: false, error: err })
-        );
-      });
-    });
-  }
+import requestToBD from "./requestToBD.js";
   
   /**
-   * Добавляет запись в таблицу tabacoo, если такой записи ещё нет.
+   * Add tabacoo to table if this don`t have in table.
    * @param {string} name 
    * @param {string} brand 
    */

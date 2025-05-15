@@ -1,3 +1,5 @@
+import requestToBD from "./requestToBD.js";
+
 export async function deleteTabacoo(tabacooName, tabacooBrand) {
     const sqlHas = 'SELECT * FROM tabacoo WHERE name = ? AND brand = ?';
     const sqlDelete = 'DELETE FROM tabacoo WHERE name = ? AND brand = ?';
@@ -20,16 +22,3 @@ export async function deleteTabacoo(tabacooName, tabacooBrand) {
         console.error('Ошибка при удалении данных\n', error);
     }
 }
-
-function requestToBD(db, sql, params = []) {
-    return new Promise(resolve => {
-      db.transaction(tx => {
-        tx.executeSql(
-          sql,
-          params,
-          (_, res) => resolve({ response: true, result: res }),
-          (_, err) => resolve({ response: false, error: err })
-        );
-      });
-    });
-  }

@@ -1,5 +1,5 @@
 import { Capacitor } from '@capacitor/core';
-
+import requestToBD from './requestToBD.js';
 export default async function setupDatabase() {
     const sqlHasDB = 'SELECT * FROM tabacoo LIMIT 1';
     const sqlCreateDB = `
@@ -28,25 +28,4 @@ export default async function setupDatabase() {
     } catch (error) {
         console.error('Ошибка при работе с БД\n', error);
     }
-}
-
-async function requestToBD (db, sql) {
-    return new Promise ((resolve, reject) => {
-        db.transaction(tx => {
-            tx.executeSql(
-                sql, 
-                [], 
-                (tx, res) => {
-                    resolve({
-                        response: true,
-                        result: res,
-                        db: db
-                    });
-                },
-                (_, error) => resolve({
-                    response: false
-                })
-            );
-        })
-    })
 }
