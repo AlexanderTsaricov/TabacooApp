@@ -37,16 +37,25 @@
 <template>
     <details class="stranghtTabacooBox">
         <summary class="stranghtTabacooBox_header">Brand select</summary>
-        <BrandBox
-            v-for="(brand, index) in brands"
-            :key="index"
-            :brand="brand"
-            @update-selection="updateSelection"
-        />
+        <div class="brand-grid">
+            <BrandBox
+                v-for="(brand, index) in brands"
+                :key="index"
+                :brand="brand"
+                @update-selection="updateSelection"
+            />
+        </div>
     </details>
 </template>
 
 <style scoped>
+    .brand-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 колонки */
+        gap: 10px; /* Отступы между элементами */
+        margin-top: 10px; /* Отступ от заголовка */
+    }
+
 
     .stranghtTabacooBox {
         background-color: #2a2a40; /* Основной фон блока */
