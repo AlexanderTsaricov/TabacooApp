@@ -1,4 +1,4 @@
-import requestToBD from "./requestToBD.js";
+import requestToBD from "../requestToBD.js";
 
 export async function deleteTabacoo(tabacooName, tabacooBrand) {
     const sqlHas = 'SELECT * FROM tabacoo WHERE name = ? AND brand = ?';

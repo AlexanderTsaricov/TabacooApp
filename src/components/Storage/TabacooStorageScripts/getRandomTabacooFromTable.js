@@ -1,4 +1,4 @@
-import { loadDataFromTable } from "./loadDataFromTable";
+import { loadDataFromTable } from "../loadDataFromTable";
 
 async function getRandomTabacooFromTable(selectedBrands = []) {
     const data = await loadDataFromTable('tabacoo');

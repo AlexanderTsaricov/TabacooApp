@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import StranghtOfTabacooBox from './StranghtOfTabacooBox.vue';
-    import getRandomTabacooFromTable from '../../Storage/getRandomTabacooFromTable.js';
+    import getRandomTabacooFromTable from '../../Storage/TabacooStorageScripts/getRandomTabacooFromTable.js';
     import { ref } from 'vue';
 
     

@@ -1,7 +1,7 @@
 <script>
     import BrandBox from './BrandBox.vue';
     import { ref, onMounted, watch } from 'vue';
-    import getBrandsFromTable from '../../Storage/getBrandsFromTable.js';
+    import getBrandsFromTable from '../../Storage/TabacooStorageScripts/getBrandsFromTable.js';
 
     export default {
         components: {

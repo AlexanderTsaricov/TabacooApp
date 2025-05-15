@@ -1,4 +1,4 @@
-import { loadDataFromTable } from "./loadDataFromTable";
+import { loadDataFromTable } from "../loadDataFromTable";
 
 /**
  * Loading brands from database and add to array

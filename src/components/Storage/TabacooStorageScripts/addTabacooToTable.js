@@ -1,4 +1,4 @@
-import requestToBD from "./requestToBD.js";
+import requestToBD from "../requestToBD.js";
   
   /**
    * Add tabacoo to table if this don`t have in table.

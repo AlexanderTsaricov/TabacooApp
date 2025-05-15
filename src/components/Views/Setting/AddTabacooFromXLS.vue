@@ -87,7 +87,7 @@
 
 <script>
     import loadDataFromXls  from '../../Storage/loadDatafromxls';
-    import { addTabacooToTable } from '../../Storage/addTabacooToTable.js';
+    import { addTabacooToTable } from '../../Storage/TabacooStorageScripts/addTabacooToTable.js';
 
     export default {
         data() {
