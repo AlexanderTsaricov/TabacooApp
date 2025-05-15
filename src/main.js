@@ -9,7 +9,8 @@ import setupDatabase from "./components/Storage/setupDatabase";
 createApp(App).mount("#app");
 
 nextTick(() => {
-    setupDatabase();
+    setupDatabase('tabacoo', ['name', 'brand']);
+    setupDatabase('tastes', ['taste', 'teksture', 'type']);
     let activeButton = getIdActiveMenuButton();
     renderPage(activeButton);
     const menuButtons = document.querySelectorAll(".menu_button");
