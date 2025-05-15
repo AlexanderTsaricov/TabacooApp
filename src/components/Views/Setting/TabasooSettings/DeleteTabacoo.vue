@@ -94,7 +94,7 @@
 </style>
 
 <script>
-import {deleteTabacoo} from '../../Storage/TabacooStorageScripts/deleteTabacooFromTable.js';
+import {deleteTabacoo} from '../../../Storage/TabacooStorageScripts/deleteTabacooFromTable.js';
 
 export default {
   data() {

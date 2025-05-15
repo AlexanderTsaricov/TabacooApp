@@ -1,6 +1,7 @@
 <template>
     <div class="loadXLSBox">
-        <h2 class="loadXLSBox_header">Загрузить табак с Exel таблицы</h2>
+        <h2 class="loadXLSBox_header">Загрузить табак</h2>
+        <h2 class="loadXLSBox_header">с Exel таблицы</h2>
         <input class="loadXLSBox_input" type="file" accept=".xls,.xlsx" @change="fileInputed" placeholder="Выберите файл...">
         <button class="loadXLSBox_button" @click="load">Upload</button>
     </div>
@@ -86,8 +87,8 @@
 </style>
 
 <script>
-    import loadDataFromXls  from '../../Storage/loadDatafromxls';
-    import { addTabacooToTable } from '../../Storage/TabacooStorageScripts/addTabacooToTable.js';
+    import loadDataFromXls  from '../../../Storage/loadDatafromxls.js';
+    import { addTabacooToTable } from '../../../Storage/TabacooStorageScripts/addTabacooToTable.js';
 
     export default {
         data() {

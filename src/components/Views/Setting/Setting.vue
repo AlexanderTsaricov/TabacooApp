@@ -1,7 +1,7 @@
 <script setup>
-    import AddTabacoo from './AddTabacoo.vue';
-    import DeleteTabacoo from './DeleteTabacoo.vue';
-    import AddTabacooFromXLS from './AddTabacooFromXLS.vue';
+    import AddTabacoo from './TabasooSettings/AddTabacoo.vue';
+    import DeleteTabacoo from './TabasooSettings/DeleteTabacoo.vue';
+    import AddTabacooFromXLS from './TabasooSettings/AddTabacooFromXLS.vue';
 </script>
 
 <template>
