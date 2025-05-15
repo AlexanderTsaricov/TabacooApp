@@ -87,7 +87,7 @@
 
 <script>
     import loadDataFromXls  from '../../Storage/loadDatafromxls';
-    import { addDataToTable } from '../../Storage/addDataToTable.js';
+    import { addTabacooToTable } from '../../Storage/addTabacooToTable.js';
 
     export default {
         data() {
@@ -114,7 +114,7 @@
                         // вы можете также передавать крепость, если расширите функцию
                         
                         // ждем выполнения insert’а перед переходом к следующей строке
-                        await addDataToTable(name, brand);
+                        await addTabacooToTable(name, brand);
                     }
 
                     console.log(`Обработано ${jsonData.length} строк.`);

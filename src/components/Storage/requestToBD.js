@@ -5,12 +5,13 @@
  * @param {string} sql — SQL-reqest
  * @returns {Promise<{ response: boolean, result?: any, error?: any }>}
  */
-async function requestToBD (db, sql) {
+async function requestToBD (db, sql, params = []) {
+    
     return new Promise ((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
                 sql, 
-                [], 
+                params, 
                 (tx, res) => {
                     resolve({
                         response: true,
@@ -19,7 +20,8 @@ async function requestToBD (db, sql) {
                     });
                 },
                 (_, error) => resolve({
-                    response: false
+                    response: false,
+                    error: error
                 })
             );
         })

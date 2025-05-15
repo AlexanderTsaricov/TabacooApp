@@ -6,7 +6,7 @@ import { loadDataFromTable } from "./loadDataFromTable";
  * @returns array with brands from database
  */
 async function getBrandsFromTable () {
-    const data = await loadDataFromTable();
+    const data = await loadDataFromTable('tabacoo');
     const brands = [];
 
     data.forEach(tabacoo => {

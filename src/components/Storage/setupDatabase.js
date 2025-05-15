@@ -1,14 +1,16 @@
 import { Capacitor } from '@capacitor/core';
 import requestToBD from './requestToBD.js';
-export default async function setupDatabase() {
-    const sqlHasDB = 'SELECT * FROM tabacoo LIMIT 1';
+export default async function setupDatabase(tableName, rowsArray) {
+    const sqlHasDB = `SELECT * FROM ${tableName} LIMIT 1`;
     const sqlCreateDB = `
-        CREATE TABLE IF NOT EXISTS tabacoo (
+        CREATE TABLE IF NOT EXISTS ${tableName} (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            brand TEXT NOT NULL
         );
     `;
+
+    rowsArray.forEach(row => {
+        sqlCreateDB += `${row} TEXT NOT NULL,\n`
+    });
 
     try {
         const db = window.sqlitePlugin.openDatabase({ name: 'tabacooDB', location: 'default' });

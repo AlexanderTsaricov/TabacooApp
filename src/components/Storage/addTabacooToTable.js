@@ -5,7 +5,7 @@ import requestToBD from "./requestToBD.js";
    * @param {string} name 
    * @param {string} brand 
    */
-  export async function addDataToTable(name, brand) {
+  export async function addTabacooToTable(name, brand) {
     try {
       // Открываем (или создаём) базу
       const db = window.sqlitePlugin.openDatabase({
@@ -35,6 +35,9 @@ import requestToBD from "./requestToBD.js";
         console.log('Данные успешно добавлены:', insertRes);
       } else {
         console.error('Ошибка при добавлении данных:', error);
+        console.error('→ code:', error.code);
+        console.error('→ message:', error.message);
+        console.dir(error);
       }
     } catch (err) {
       console.error('Не удалось добавить данные в БД:', err);

@@ -88,7 +88,7 @@
 
 
 <script>
-import { addDataToTable } from '../../Storage/addDataToTable';
+import { addTabacooToTable } from '../../Storage/addTabacooToTable.js';
 
 export default {
   data() {
@@ -108,7 +108,7 @@ export default {
 
       try {
         // Попытка добавления данных
-        const result = await addDataToTable(this.name, this.brand);
+        const result = await addTabacooToTable(this.name, this.brand);
         console.log("Результат добавления:", result);
 
         // Очистка полей после добавления
@@ -116,7 +116,10 @@ export default {
         this.brand = "";
         alert("Данные успешно добавлены!");
       } catch (error) {
-        console.error("Ошибка добавления данных:", error);
+        console.error('Ошибка при добавлении данных:', error);
+        console.error('→ code:', error.code);
+        console.error('→ message:', error.message);
+        console.dir(error);
         alert("Произошла ошибка при добавлении данных.");
       }
     },

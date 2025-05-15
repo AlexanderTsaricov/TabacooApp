@@ -1,7 +1,7 @@
 import { loadDataFromTable } from "./loadDataFromTable";
 
 async function getRandomTabacooFromTable(selectedBrands = []) {
-    const data = await loadDataFromTable();
+    const data = await loadDataFromTable('tabacoo');
     const filtredData = [];
     
     if (selectedBrands.length < 1) {

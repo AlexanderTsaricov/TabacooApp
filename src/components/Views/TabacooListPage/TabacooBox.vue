@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { deleteTabacoo } from '../../Storage/deleteDataFromTable.js';
+import { deleteTabacoo } from '../../Storage/deleteTabacooFromTable.js';
 
 export default {
   props: {

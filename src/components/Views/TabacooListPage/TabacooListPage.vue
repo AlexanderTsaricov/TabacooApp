@@ -68,7 +68,7 @@ export default {
     // Вынесли логику загрузки в отдельный метод
     async fetchTabacoos() {
       try {
-        const data = await loadDataFromTable();
+        const data = await loadDataFromTable('tabacoo');
         if (Array.isArray(data)) {
           const filtredData = filterTabacoos(data, this.searchString);
           this.tabacooList = filtredData;

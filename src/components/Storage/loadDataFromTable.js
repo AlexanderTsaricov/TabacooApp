@@ -1,11 +1,12 @@
 import requestToBD from "./requestToBD.js";
   
 /**
- * Загружает все записи из таблицы tabacoo.
- * Если таблицы нет — возвращает пустой массив.
- * @returns {Promise<Array>} — массив строк
+ * Loading data from table
+ * If don`t  have table return array
+ * @param tableName - table name
+ * @returns {Promise<Array>} — array
  */
-export async function loadDataFromTable() {
+export async function loadDataFromTable(tableName) {
   // Открываем или создаём базу (setupDatabase уже гарантировал, что таблица есть)
   const db = window.sqlitePlugin.openDatabase({
     name: 'tabacooDB',
@@ -13,7 +14,7 @@ export async function loadDataFromTable() {
   });
 
   // Попробуем выполнить выборку
-  const sql = 'SELECT * FROM tabacoo';
+  const sql = `SELECT * FROM ${tableName}`;
   const { response, result, error } = await requestToBD(db, sql);
 
   if (response) {
@@ -24,7 +25,7 @@ export async function loadDataFromTable() {
     }
     return items;
   } else {
-    console.error('Ошибка при чтении данных из tabacoo:', error);
+    console.error(`Ошибка при чтении данных из ${tableName}:`, error);
     return [];
   }
 }
