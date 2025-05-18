@@ -1,11 +1,46 @@
 <template>
     <div class="tasteListPageBox">
         <h2 class="tasteListPageBox_header">Taste List</h2>
-        <li class="tasteListPageBox_lists">
-
-        </li>
+        <ul class="tasteListPageBox_lists">
+          <li v-for="item in tasteList" :key="item.taste + item.teksture + item.type" class="">
+            <TasteBox :item="item"/>
+          </li>
+        </ul>
     </div>
 </template>
+
+<script>
+  import TasteBox from './TasteBox.vue';
+  import { loadDataFromTable } from '../../Storage/loadDataFromTable.js';
+  export default {
+    name: 'TasteListPage',
+    components: {TasteBox},
+    data() {
+      return {
+        tasteList: []
+      }
+    },
+    methods: {
+      async fetchTastes() {
+        try {
+          const data = await loadDataFromTable('tastes');
+          if (Array.isArray(data)) {
+            this.tasteList = data;
+          } else {
+            console.error('fetched data is not array');
+          }
+        } catch (error) {
+          console.error('Erorr fetch tastes', error);
+        }
+      }
+    },
+
+    async mounted() {
+      await this.fetchTastes();
+    }
+  }
+
+</script>
 
 <style scoped>
   /* Обёртка страницы со списком вкусов */

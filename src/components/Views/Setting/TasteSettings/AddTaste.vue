@@ -7,11 +7,12 @@
         <input class="addTasteForm_input" v-model="teksture" id="teksture" type="text">
         <label for="type">Тип продукта</label>
         <input class="addTasteForm_input" v-model="type" id="type" type="text">
-        <button class="addTasteForm_submit">Submit</button>
+        <button class="addTasteForm_submit" @click="handleAdd">Submit</button>
     </form>
 </template>
 
 <script>
+    import addTasteToTable from '../../../Storage/TasteStorageScripts/addTasteToTable';
     export default {
         data() {
             return {
@@ -20,7 +21,35 @@
             type: "",
             };
         },
+        methods: {
+            async handleAdd() {
+            // Проверка на пустые поля
+            if (!this.taste.trim() || !this.teksture.trim() || !this.type.trim()) {
+                alert("Пожалуйста, заполните все поля!");
+                return;
+            }
+
+            try {
+                // Попытка добавления данных
+                const result = await addTasteToTable(this.taste, this.teksture, this.type);
+                console.log("Результат добавления:", result);
+
+                // Очистка полей после добавления
+                this.taste = "";
+                this.teksture = "";
+                this.type = "type"
+                alert("Данные успешно добавлены!");
+            } catch (error) {
+                console.error('Ошибка при добавлении данных:', error);
+                console.error('→ code:', error.code);
+                console.error('→ message:', error.message);
+                console.dir(error);
+                alert("Произошла ошибка при добавлении данных.");
+            }
+            },
+        },
     }
+    
 </script>
 
 <style scoped>
@@ -33,7 +62,7 @@
         flex-direction: column;
         gap: 20px;
         align-items: stretch;
-        max-width: 400px;
+        max-width: 100%;
         margin: 0 auto 15px;
     }
 

@@ -10,6 +10,7 @@
 
 <style scoped>
     .menu {
+        max-width: 100%;
         background-color: #1e1e2f;
         padding: 20px;
         border-radius: 12px;

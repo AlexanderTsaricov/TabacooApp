@@ -1,9 +1,10 @@
 <template>
-    <li class="tasteBox">
-        <p class="tasteBox_name">{{ item.name }}</p>
-        <p class="tasteBox_type">{{ item.type }}</p>
+    <div class="tasteBox">
+        <p class="tasteBox_name">Taste: {{ item.taste }}</p>
+        <p class="tasteBox_name">Texture: {{ item.teksture }}</p>
+        <p class="tasteBox_type">Type: {{ item.type }}</p>
         <button class="tasteBox_button">DELETE</button>
-    </li>
+    </div>
 </template>
 
 <script>
@@ -18,56 +19,71 @@
 </script>
 
 <style scoped>
-  /* Контейнер одного вкуса */
+  /* Контейнер вкуса */
   .tasteBox {
     background-color: #2a2a40;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    padding: 15px;
-    margin-bottom: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    margin-bottom: 20px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.2s ease;
   }
 
-  /* Название вкуса */
+  .tasteBox:hover {
+    transform: scale(1.01);
+  }
+
+  /* Название вкуса и текстура */
   .tasteBox_name {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #80d4ff;
     margin: 0;
+    line-height: 1.4;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Texture — визуально чуть светлее и без bold */
+  .tasteBox_name:nth-of-type(2) {
+    color: #c0c0ff;
+    font-weight: normal;
   }
 
   /* Тип вкуса */
   .tasteBox_type {
     font-size: 14px;
     color: #e0e0e0;
-    margin: 0 1rem;
-    flex-grow: 1;
+    margin: 0 0 10px 0;
+    font-style: italic;
   }
 
-  /* Кнопка удаления */
+  /* Кнопка удаления на всю ширину */
   .tasteBox_button {
-    background-color: #1e1e2f;
-    color: #e0e0e0;
+    width: 100%;
+    background-color: #ff5555;
+    color: #fff;
     border: none;
     border-radius: 8px;
-    padding: 8px 12px;
+    padding: 10px 16px;
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
     transition: background-color 0.3s ease, transform 0.1s ease;
+    /* убираем align-self */
+    /* align-self: flex-end; */
   }
 
   .tasteBox_button:hover {
-    background-color: #3a3a5a;
+    background-color: #ff7777;
   }
 
   .tasteBox_button:active {
-    background-color: #ff9966;
+    background-color: #ff3333;
+    transform: scale(0.96);
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
-    transform: scale(0.98);
   }
 </style>

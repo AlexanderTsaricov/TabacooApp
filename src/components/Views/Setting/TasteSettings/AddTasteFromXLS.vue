@@ -1,16 +1,28 @@
 <template>
   <div class="loadXLSBox">
-    <h2 class="loadXLSBox_header">Загрузить табак</h2>
+    <h2 class="loadXLSBox_header">Загрузить вкусы</h2>
     <h2 class="loadXLSBox_header">с Excel таблицы</h2>
 
-    <label class="loadXLSBox_label" :class="{ selected: selectedFile }">
+    <label
+      class="loadXLSBox_label"
+      :class="{ selected: selectedFile }"
+    >
       <span class="loadXLSBox_label_text">
         {{ selectedFile ? selectedFile.name : 'Выбрать файл' }}
       </span>
-      <input class="loadXLSBox_input" type="file" accept=".xls,.xlsx" @change="fileInputed">
+      <input
+        class="loadXLSBox_input"
+        type="file"
+        accept=".xls,.xlsx"
+        @change="fileInputed"
+      />
     </label>
 
-    <button class="loadXLSBox_button" :disabled="!selectedFile" @click="load">
+    <button
+      class="loadXLSBox_button"
+      :disabled="isLoading"
+      @click="load"
+    >
       Upload
     </button>
   </div>
@@ -102,13 +114,14 @@
 
 <script>
 import loadDataFromXls from '../../../Storage/loadDatafromxls.js';
-import { addTabacooToTable } from '../../../Storage/TabacooStorageScripts/addTabacooToTable.js';
+import addTasteToTable from '../../../Storage/TasteStorageScripts/addTasteToTable.js';
 
 export default {
   data() {
     return {
       selectedFile: null,
-      list: 0
+      list: 0,
+      isLoading: false
     };
   },
   methods: {
@@ -117,17 +130,22 @@ export default {
       this.selectedFile = files && files.length ? files[0] : null;
     },
     async load() {
-      if (!this.selectedFile) return;
+      if (!this.selectedFile || this.isLoading) return;
+      this.isLoading = true;
       try {
         const jsonData = await loadDataFromXls(this.selectedFile, this.list);
         for (const row of jsonData) {
-          const brand = row['Бренд'];
-          const name = row['Название Смеси'];
-          await addTabacooToTable(name, brand);
+          const taste = row['Вкус'];
+          const teksture = row['Текстура'];
+          const type = row['Тип'];
+          console.log(`Обработка: ${taste}, ${teksture}, ${type}`);
+          await addTasteToTable(taste, teksture, type);
         }
         console.log(`Обработано ${jsonData.length} строк.`);
       } catch (err) {
-        console.error('Ошибка загрузки XLS:', err);
+        console.error('Ошибка загрузки XLS:', err?.message || err);
+      } finally {
+        this.isLoading = false;
       }
     }
   }

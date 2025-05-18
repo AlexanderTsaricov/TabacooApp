@@ -65,7 +65,6 @@ export default {
   },
 
   methods: {
-    // Вынесли логику загрузки в отдельный метод
     async fetchTabacoos() {
       try {
         const data = await loadDataFromTable('tabacoo');

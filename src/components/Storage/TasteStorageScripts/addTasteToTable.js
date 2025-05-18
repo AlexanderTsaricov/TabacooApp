@@ -2,10 +2,11 @@ import requestToBD from "../requestToBD.js";
   
   /**
    * Add tabacoo to table if this don`t have in table.
-   * @param {string} name 
-   * @param {string} brand 
+   * @param {string} taste 
+   * @param {string} teksture
+   * @param {string} type 
    */
-  export async function addTasteToTable(taste, teksture, type) {
+  export default async function addTasteToTable(taste, teksture, type) {
     try {
       // Открываем (или создаём) базу
       const db = window.sqlitePlugin.openDatabase({
@@ -28,7 +29,7 @@ import requestToBD from "../requestToBD.js";
       }
   
       // Вставляем новую запись
-      const insertSQL = 'INSERT INTO tastes (taste, teskture, type) VALUES (?, ?, ?)';
+      const insertSQL = 'INSERT INTO tastes (taste, teksture, type) VALUES (?, ?, ?)';
       const { response: ok, result: insertRes, error } = await requestToBD(db, insertSQL, [taste, teksture, type]);
   
       if (ok) {

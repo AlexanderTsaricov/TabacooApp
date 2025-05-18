@@ -24,7 +24,7 @@
         flex-direction: column;
         gap: 20px; /* Расстояние между элементами */
         align-items: stretch; /* Полный размер внутренних элементов */
-        max-width: 400px;
+        max-width: 100%;
         margin: 0 auto; /* Центровка блока на странице */
         margin-bottom: 15px;
     }
