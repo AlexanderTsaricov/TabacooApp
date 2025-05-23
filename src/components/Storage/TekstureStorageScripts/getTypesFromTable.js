@@ -1,12 +1,12 @@
 import { loadDataFromTable } from "../loadDataFromTable";
 
 export default async function getTypesFromTable() {
-    const data = await loadDataFromTable('tastes');
+    const data = await loadDataFromTable('tekstures');
     const types = [];
 
-    data.forEach(taste => {
-        if (!types.includes(taste.type)) {
-            types.push(taste.type);
+    data.forEach(teksture => {
+        if (!types.includes(teksture.type)) {
+            types.push(teksture.type);
         }
     });
 

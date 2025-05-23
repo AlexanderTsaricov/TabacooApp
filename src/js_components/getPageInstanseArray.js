@@ -4,6 +4,8 @@ import TabacooListPage from "../components/Views/TabacooListPage/TabacooListPage
 import Setting from "../components/Views/Setting/Setting.vue";
 import TasteListPage from "../components/Views/TasteList/TasteListPage.vue"
 import RandomTastePage from "../components/Views/RandomTastePage/RandomTastePage.vue";
+import TabacooSettingsPage from "../components/Views/Setting/TabasooSettings/TabacooSettingsPage.vue";
+import TasteSettingsPage from "../components/Views/Setting/TasteSettings/TasteSettingsPage.vue";
 
 export default function getPageInstanceArray() {
     const arrayInstance = {};
@@ -14,8 +16,11 @@ export default function getPageInstanceArray() {
     arrayInstance["tabacooList"] = createApp({
         render: () => h(TabacooListPage),
     });
-    arrayInstance["setting"] = createApp({
-        render: () => h(Setting),
+    arrayInstance["tabacooSetting"] = createApp({
+        render: () => h(TabacooSettingsPage),
+    });
+     arrayInstance["tasteSetting"] = createApp({
+        render: () => h(TasteSettingsPage),
     });
     arrayInstance["tasteList"] = createApp({
         render: () => h(TasteListPage),

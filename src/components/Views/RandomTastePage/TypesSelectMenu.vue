@@ -1,7 +1,7 @@
 <script>
 import TypesSelectBox from './TypesSelectBox.vue';
 import { ref, onMounted } from 'vue';
-import getTypesFromTable from '../../Storage/TasteStorageScripts/getTypesFromTable.js';
+import getTypesFromTable from '../../Storage/TekstureStorageScripts/getTypesFromTable.js';
 
 export default {
   components: {

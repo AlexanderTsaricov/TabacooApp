@@ -1,17 +1,17 @@
 import requestToBD from "../requestToBD.js";
 
-export default async function deleteTasteFromTable(taste, teksture, type) {
-    const sqlHas = 'SELECT * FROM tastes WHERE taste = ? AND teksture = ? AND type = ?';
-    const sqlDelete = 'DELETE FROM tastes WHERE taste = ? AND teksture = ? AND type = ?';
+export default async function deleteTasteFromTable(taste) {
+    const sqlHas = 'SELECT * FROM tastes WHERE taste = ?';
+    const sqlDelete = 'DELETE FROM tastes WHERE taste = ?';
     try {
         const db = window.sqlitePlugin.openDatabase({
             name: 'tabacooDB',
             location: 'default'
         });
 
-        const hasTabacoo = (await requestToBD(db, sqlHas, [taste, teksture, type])).response;
+        const hasTabacoo = (await requestToBD(db, sqlHas, [taste])).response;
         if (hasTabacoo) {
-            const resultDelete = await requestToBD(db, sqlDelete, [taste, teksture, type]);
+            const resultDelete = await requestToBD(db, sqlDelete, [taste]);
             return resultDelete;
         } else {
             return {

@@ -3,6 +3,9 @@ class Tabacoo {
     #brand = "";
 
     constructor(name, brand) {
+        if (typeof(name) !== "string" && typeof(brand) !== "string") {
+            throw new Error("Invalid arument. Need by are string");
+        }
         this.name = name;
         this.brand = brand;
     }
@@ -15,3 +18,5 @@ class Tabacoo {
         return this.#brand;
     }
 }
+
+export default Tabacoo;

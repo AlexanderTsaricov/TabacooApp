@@ -2,11 +2,9 @@ import requestToBD from "../requestToBD.js";
   
   /**
    * Add tabacoo to table if this don`t have in table.
-   * @param {string} taste 
-   * @param {string} teksture
-   * @param {string} type 
+   * @param {string} taste
    */
-  export default async function addTasteToTable(taste, teksture, type) {
+  export default async function addTasteToTable(taste) {
     try {
       // Открываем (или создаём) базу
       const db = window.sqlitePlugin.openDatabase({
@@ -15,8 +13,8 @@ import requestToBD from "../requestToBD.js";
       });
   
       // Проверяем, есть ли уже такая запись
-      const selectSQL = 'SELECT * FROM tastes WHERE taste = ? AND teksture = ? AND type = ?';
-      const { response: has, result: selectRes } = await requestToBD(db, selectSQL, [taste, teksture, type]);
+      const selectSQL = 'SELECT * FROM tastes WHERE taste = ?';
+      const { response: has, result: selectRes } = await requestToBD(db, selectSQL, [taste]);
   
       if (!has) {
         console.error('Ошибка при проверке существующих записей:', selectRes?.error);
@@ -29,8 +27,8 @@ import requestToBD from "../requestToBD.js";
       }
   
       // Вставляем новую запись
-      const insertSQL = 'INSERT INTO tastes (taste, teksture, type) VALUES (?, ?, ?)';
-      const { response: ok, result: insertRes, error } = await requestToBD(db, insertSQL, [taste, teksture, type]);
+      const insertSQL = 'INSERT INTO tastes (taste) VALUES (?)';
+      const { response: ok, result: insertRes, error } = await requestToBD(db, insertSQL, [taste]);
   
       if (ok) {
         console.log('Данные успешно добавлены:', insertRes);

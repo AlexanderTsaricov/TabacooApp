@@ -10,7 +10,8 @@ createApp(App).mount("#app");
 
 nextTick(() => {
     setupDatabase('tabacoo', ['name', 'brand']);
-    setupDatabase('tastes', ['taste', 'teksture', 'type']);
+    setupDatabase('tastes', ['taste']);
+    setupDatabase('tekstures', ['teksture', 'type']);
     let activeButton = getIdActiveMenuButton();
     renderPage(activeButton);
     const menuButtons = document.querySelectorAll(".menu_button");
