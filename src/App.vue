@@ -14,6 +14,6 @@ import Logo from './components/Views/logoBox/logoBox.vue'
 
 <style scoped>
   .app {
-    max-width: 100vw;
+    width: 90vw;
   }
 </style>
