@@ -1,43 +1,47 @@
 <template>
     <form class="addTasteForm">
-        <h2 class="addTasteForm_header">Добавить вкус</h2>
-        <label for="name">Название вкуса</label>
-        <input class="addTasteForm_input" v-model="taste" id="taste" type="text">
+        <h2 class="addTasteForm_header">Добавить текстуру</h2>
+        <label for="type">Текстура продукта</label>
+        <input class="addTasteForm_input" v-model="teksture" id="teksture" type="text">
+        <label for="type">Тип продукта</label>
+        <input class="addTasteForm_input" v-model="type" id="type" type="text">
         <button class="addTasteForm_submit" type="button" @click="handleAdd">Submit</button>
     </form>
 </template>
 
 <script>
-    import addTasteToTable from '../../../Storage/TasteStorageScripts/addTasteToTable';
+import addTekstureToTable from '../../../Storage/TekstureStorageScripts/addTekstureToTable';
     export default {
         data() {
             return {
-            	taste: ""
+                teksture: "",
+                type: "",
             };
         },
         methods: {
             async handleAdd() {
             // Проверка на пустые поля
-				if (!this.taste.trim()) {
-					alert("Пожалуйста, заполните все поля!");
-					return;
-				}
+                if (!this.teksture.trim() || !this.type.trim()) {
+                    alert("Пожалуйста, заполните все поля!");
+                    return;
+                }
 
-				try {
-					// Попытка добавления данных
-					const result = await addTasteToTable(this.taste);
-					console.log("Результат добавления:", result);
+                try {
+                    // Попытка добавления данных
+                    const result = await addTekstureToTable(this.teksture, this.type);
+                    console.log("Результат добавления:", result);
 
-					// Очистка полей после добавления
-					this.taste = "";
-					alert("Данные успешно добавлены!");
-				} catch (error) {
-					console.error('Ошибка при добавлении данных:', error);
-					console.error('→ code:', error.code);
-					console.error('→ message:', error.message);
-					console.dir(error);
-					alert("Произошла ошибка при добавлении данных.");
-				}
+                    // Очистка полей после добавления
+                    this.teksture = "";
+                    this.type = "";
+                    alert("Данные успешно добавлены!");
+                } catch (error) {
+                    console.error('Ошибка при добавлении данных:', error);
+                    console.error('→ code:', error.code);
+                    console.error('→ message:', error.message);
+                    console.dir(error);
+                    alert("Произошла ошибка при добавлении данных.");
+                }   
             },
         },
     }

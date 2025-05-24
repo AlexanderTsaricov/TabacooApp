@@ -1,20 +1,26 @@
 <template>
     <div class="tasteBox">
-        <p class="tasteBox_name">Taste: {{ item.taste }}</p>
-        <p class="tasteBox_name">Texture: {{ item.teksture }}</p>
-        <p class="tasteBox_type">Type: {{ item.type }}</p>
-        <button class="tasteBox_button">DELETE</button>
+		<p class="tasteBox_name">Texture: {{ item.teksture }}</p>
+		<p class="tasteBox_name">Type: {{ item.type }}</p>
+		<button class="tasteBox_button" @click="deleteTexture">DELETE</button>
     </div>
 </template>
 
 <script>
+
+	import deleteTekstureFromTable from '../../../Storage/TekstureStorageScripts/deleteTekstureFromTable';
     export default {
-        props: {
-            item: {
-                type: Object,
-                required: true
-            }
-        },
+		props: {
+			item: {
+				type: Object,
+				required: true
+			}
+		},
+		methods: {
+			deleteTexture() {
+				deleteTekstureFromTable(this.item.teksture, this.item.type);
+			}
+		}
     }
 </script>
 

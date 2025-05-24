@@ -1,7 +1,7 @@
 import requestToBD from "../requestToBD.js";
   
   /**
-   * Add tabacoo to table if this don`t have in table.
+   * Add row to table tekstures if this don`t have in table.
    * @param {string} teksture
    * @param {string} type 
    */
@@ -32,7 +32,7 @@ import requestToBD from "../requestToBD.js";
       const { response: ok, result: insertRes, error } = await requestToBD(db, insertSQL, [teksture, type]);
   
       if (ok) {
-        console.log('Данные успешно добавлены:', insertRes);
+        console.log('Данные успешно добавлены в tekstures:', insertRes);
       } else {
         console.error('Ошибка при добавлении данных:', error);
         console.error('→ code:', error.code);

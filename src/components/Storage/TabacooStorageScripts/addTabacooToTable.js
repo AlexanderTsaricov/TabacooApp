@@ -32,7 +32,7 @@ import requestToBD from "../requestToBD.js";
       const { response: ok, result: insertRes, error } = await requestToBD(db, insertSQL, [name, brand]);
   
       if (ok) {
-        console.log('Данные успешно добавлены:', insertRes);
+        console.log('Данные успешно добавлены в tabacoos:', insertRes);
       } else {
         console.error('Ошибка при добавлении данных:', error);
         console.error('→ code:', error.code);

@@ -1,6 +1,6 @@
 <template>
     <div class="clearTablesBox">
-        <button class="clearTasteTable" @click="clearTasteTable">Очистить таблицу вкусов</button>
+        <button class="clearTasteTable" @click="clearTeksturesTable">Очистить таблицу текстур</button>
     </div>
 </template>
 
@@ -8,13 +8,13 @@
     import clearTable from "../../../Storage/clearTable.js";
     export default {
         methods: {
-            async clearTasteTable () {
+            async clearTeksturesTable () {
                 try {
-                    await clearTable('tastes');
+                    await clearTable('tekstures');
                     alert("Данные успешно очищены!");
                     console.log("Таблица tastes очищена");
                 } catch (err) {
-                    console.error("Ошибка при очистке tastes:", err);
+                    console.error("Ошибка при очистке tekstures:", err);
                 }
             }
         }

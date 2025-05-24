@@ -1,6 +1,6 @@
 import requestToBD from "../requestToBD.js";
 
-export default async function deleteTasteFromTable(taste) {
+async function deleteTasteFromTable(taste) {
     const sqlHas = 'SELECT * FROM tastes WHERE taste = ?';
     const sqlDelete = 'DELETE FROM tastes WHERE taste = ?';
     try {
@@ -22,3 +22,5 @@ export default async function deleteTasteFromTable(taste) {
         console.error('Ошибка при удалении данных\n', error);
     }
 }
+
+export default deleteTasteFromTable;

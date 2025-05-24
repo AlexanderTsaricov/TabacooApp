@@ -17,6 +17,7 @@
     <menu :class="`menu menu_setting ${activeMenu == 'setting' ? '' : 'menu_hidden'}`">
         <button class="menu_button" id="tabacooSetting">Setting Tabacoo</button>
         <button class="menu_button" id="tasteSetting">Setting Taste</button>
+        <button class="menu_button" id="textureSetting">Setting Texture</button>
     </menu>
     <menu :class="`menu taste ${activeMenu == 'taste' ? '' : 'menu_hidden'}`">
         <button class="menu_button" id="tasteRand">Taste Random</button>

@@ -2,72 +2,61 @@
   <div class="tasteListPageBox">
     <h2 class="tasteListPageBox_header">Taste List</h2>
     <div class="tasteListPageBox_searchBox">
-      <div class="tasteListPageBox_searchRow">
-        <label class="tasteListPageBox_searchText" for="tasteListPageBox_searchInput">Search</label>
-        <input
-          id="tasteListPageBox_searchInput"
-          class="tasteListPageBox_searchInput"
-          type="text"
-          v-model="searchString"
-          placeholder="Поиск по вкусу..."
-          @input="applyFilter"
-        />
-      </div>
-      <TypesSelectMenu @update-selected-types="onUpdateSelectedTypes" />
+        <div class="tasteListPageBox_searchRow">
+            <label class="tasteListPageBox_searchText" for="tasteListPageBox_searchInput">Search</label>
+            <input class="tasteListPageBox_searchInput"
+				id="tasteListPageBox_searchInput"
+				type="text"
+				v-model="searchString"
+				placeholder="Search by taste..."
+				@input="applyFilter"
+            />
+        </div>
     </div>
     <ul class="tasteListPageBox_lists">
-      <li
-        v-for="item in tasteList"
-        :key="item.taste + item.teksture + item.type"
-      >
-        <TasteBox :item="item" />
-      </li>
+		<li v-for="item in tasteList" :key="item.taste + item.teksture + item.type">
+			<TasteBox :item="item" />
+		</li>
     </ul>
   </div>
 </template>
 
 <script>
 import TasteBox from './TasteBox.vue';
-import { loadDataFromTable } from '../../Storage/loadDataFromTable.js';
-import filterTaste from '../../../js_components/filterTaste.js';
-import TypesSelectMenu from '../RandomTastePage/TypesSelectMenu.vue';
+import { loadDataFromTable } from '../../../Storage/loadDataFromTable.js';
+import filterTaste from '../../../../js_components/filterTaste.js';
 
 export default {
-  name: 'TasteListPage',
-  components: { TasteBox, TypesSelectMenu },
-  data() {
-    return {
-      originalTasteList: [],
-      tasteList: [],
-      searchString: '',
-      selectedTypes: []
-    };
-  },
-  methods: {
-    async fetchTastes() {
-      try {
-        const data = await loadDataFromTable('tastes');
-        if (Array.isArray(data)) {
-          this.originalTasteList = data;
-          this.tasteList = filterTaste(data, this.searchString);
-        } else {
-          console.error('fetched data is not array');
-        }
-      } catch (error) {
-        console.error('Error fetch tastes', error);
-      }
-    },
-    applyFilter() {
-      this.tasteList = filterTaste(this.originalTasteList, this.searchString, this.selectedTypes);
-    },
-    onUpdateSelectedTypes(types) {
-      this.selectedTypes = types;
-      this.applyFilter();
-    },
-  },
-  async mounted() {
-    await this.fetchTastes();
-  },
+	name: 'TasteListPage',
+	components: { TasteBox },
+	data() {
+		return {
+			originalTasteList: [],
+			tasteList: [],
+			searchString: '',
+		};
+	},
+	methods: {
+		async fetchTastes() {
+		try {
+			const data = await loadDataFromTable('tastes');
+			if (Array.isArray(data)) {
+				this.originalTasteList = data;
+				this.tasteList = filterTaste(data, this.searchString);
+			} else {
+				console.error('fetched data is not array');
+			}
+		} catch (error) {
+			console.error('Error fetch tastes', error);
+		}
+		},
+		applyFilter() {
+			this.tasteList = filterTaste(this.originalTasteList, this.searchString);
+		},
+	},
+	async mounted() {
+		await this.fetchTastes();
+	},
 };
 </script>
 
@@ -129,6 +118,7 @@ export default {
   padding: 0;
   width: 100%;
   box-sizing: border-box;
+  margin-bottom: 16px;
 }
 
 .tasteListPageBox_searchText {

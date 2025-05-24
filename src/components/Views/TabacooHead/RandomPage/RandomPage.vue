@@ -1,10 +1,10 @@
-<script setup lang="ts">
+<script setup>
     import StranghtOfTabacooBox from './StranghtOfTabacooBox.vue';
-    import getRandomTabacooFromTable from '../../Storage/TabacooStorageScripts/getRandomTabacooFromTable.js';
+    import getRandomTabacooFromTable from '../../../Storage/TabacooStorageScripts/getRandomTabacooFromTable.js';
     import { ref } from 'vue';
 
     
-    const selectedBrands = ref<string[]>([]);
+    const selectedBrands = ref([]);
     const firstTabacooName = ref('Первый табак');
     const firstTabacooBrand = ref('');
     const secondTabacooName = ref('Второй табак');
@@ -24,7 +24,7 @@
         }
     }
 
-    function writeTabacooToRandomBox(tabacoo: Array<string>) {
+    function writeTabacooToRandomBox(tabacoo) {
         if (firstTabacooName.value == 'Первый табак') {
             firstTabacooName.value = tabacoo[0];
             firstTabacooBrand.value = tabacoo[1];
@@ -62,7 +62,7 @@
     </div>
     <StranghtOfTabacooBox 
         msg="Vite + Vue" 
-        @update-selected-brands="(brands: string[]) => selectedBrands = brands"
+        @update-selected-brands="(brands) => selectedBrands = brands"
     />
     <button class="randomTabacoo" @click="sendToConsoleSelectedBrands()">Start Random</button>
   </div>

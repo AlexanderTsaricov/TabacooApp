@@ -1,10 +1,10 @@
 import requestToBD from "./requestToBD";
+import setupDatabase from './setupDatabase';
 
 export default async function clearTabacooTable(tableName) {
     try {
         const sqlClearString = `
-            delete from ${tableName};
-            delete from sqlite_sequence where name = '${tableName}';
+            drop table ${tableName};
         `
         // Открываем (или создаём) базу
         const db = window.sqlitePlugin.openDatabase({
@@ -12,6 +12,9 @@ export default async function clearTabacooTable(tableName) {
             location: 'default'
         });
         const result = requestToBD(db, sqlClearString);
+        setupDatabase('tabacoo', ['name', 'brand']);
+        setupDatabase('tastes', ['taste']);
+        setupDatabase('tekstures', ['teksture', 'type']);
         return result;
     } catch (err) {
         console.error('Error clear table:', err);

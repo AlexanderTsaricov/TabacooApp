@@ -31,7 +31,7 @@ import requestToBD from "../requestToBD.js";
       const { response: ok, result: insertRes, error } = await requestToBD(db, insertSQL, [taste]);
   
       if (ok) {
-        console.log('Данные успешно добавлены:', insertRes);
+        console.log('Данные успешно добавлены в tastes:', insertRes);
       } else {
         console.error('Ошибка при добавлении данных:', error);
         console.error('→ code:', error.code);

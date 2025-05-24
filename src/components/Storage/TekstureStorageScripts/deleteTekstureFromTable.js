@@ -1,6 +1,11 @@
 import requestToBD from "../requestToBD.js";
-
-export default async function deleteTasteFromTable(teksture, type) {
+/**
+ * Delete row from table tekstures
+ * @param {String} teksture 
+ * @param {String} type 
+ * @returns 
+ */
+async function deleteTekstureFromTable(teksture, type) {
     const sqlHas = 'SELECT * FROM tekstures WHERE teksture = ? AND type = ?';
     const sqlDelete = 'DELETE FROM tekstures WHERE teksture = ? AND type = ?';
     try {
@@ -22,3 +27,5 @@ export default async function deleteTasteFromTable(teksture, type) {
         console.error('Ошибка при удалении данных\n', error);
     }
 }
+
+export default deleteTekstureFromTable;

@@ -36,70 +36,70 @@
 </template>
 
 <script>
-import { loadDataFromTable } from '../../Storage/loadDataFromTable.js';
+import { loadDataFromTable } from '../../../Storage/loadDataFromTable.js';
 import StrengthCheckbox from '../RandomPage/BrandBox.vue';
 import TabacooBox from './TabacooBox.vue';
-import filterTabacoos from '../../../js_components/filterTabacoos.js';
+import filterTabacoos from '../../../../js_components/filterTabacoos.js';
 
 export default {
-  name: 'TabacooList',
-  components: { TabacooBox, StrengthCheckbox },
+	name: 'TabacooList',
+	components: { TabacooBox, StrengthCheckbox },
 
-  data() {
-    return {
-      tabacooList: [],
-      searchString: '',
-      selectedBrands: [] 
-    };
-  },
+	data() {
+		return {
+		tabacooList: [],
+		searchString: '',
+		selectedBrands: [] 
+		};
+	},
 
-  computed: {
-    uniqueBrands() {
-      const brands = this.tabacooList.map(item => item.brand);
-      return Array.from(new Set(brands));
-    },
-    // всегда возвращает отфильтрованный массив
-    filteredTabacooList() {
-      return filterTabacoos(this.tabacooList, this.searchString, this.selectedBrands);
-    }
-  },
+	computed: {
+		uniqueBrands() {
+		const brands = this.tabacooList.map(item => item.brand);
+		return Array.from(new Set(brands));
+		},
+		// всегда возвращает отфильтрованный массив
+		filteredTabacooList() {
+		return filterTabacoos(this.tabacooList, this.searchString, this.selectedBrands);
+		}
+	},
 
-  methods: {
-    async fetchTabacoos() {
-      try {
-        const data = await loadDataFromTable('tabacoo');
-        if (Array.isArray(data)) {
-          const filtredData = filterTabacoos(data, this.searchString);
-          this.tabacooList = filtredData;
-        } else {
-          console.error('Загруженные данные не являются массивом.');
-        }
-      } catch (error) {
-        console.error('Ошибка при загрузке данных:', error);
-      }
-    },
+	methods: {
+		async fetchTabacoos() {
+		try {
+			const data = await loadDataFromTable('tabacoo');
+			if (Array.isArray(data)) {
+			const filtredData = filterTabacoos(data, this.searchString);
+			this.tabacooList = filtredData;
+			} else {
+				console.error('Загруженные данные не являются массивом.');
+			}
+		} catch (error) {
+			console.error('Ошибка при загрузке данных:', error);
+		}
+		},
 
-    onBrandSelection({ brand, checked }) {
-      if (checked && !this.selectedBrands.includes(brand)) {
-        this.selectedBrands.push(brand);
-      } else if (!checked) {
-        this.selectedBrands = this.selectedBrands.filter(b => b !== brand);
-      }
-    },
+		onBrandSelection({ brand, checked }) {
+		if (checked && !this.selectedBrands.includes(brand)) {
+			this.selectedBrands.push(brand);
+		} else if (!checked) {
+			this.selectedBrands = this.selectedBrands.filter(b => b !== brand);
+		}
+		},
 
-    // Метод-обработчик события удаления
-    onDeleted(deletedItem) {
-      // Оптимистично удаляем из локального массива
-      this.tabacooList = this.tabacooList.filter(
-        item => !(item.name === deletedItem.name && item.brand === deletedItem.brand)
-      );
-    }
-  },
+		// Метод-обработчик события удаления
+		onDeleted(deletedItem) {
+			// Оптимистично удаляем из локального массива
+			this.tabacooList = this.tabacooList.filter(
+				item => !(item.name === deletedItem.name && item.brand === deletedItem.brand)
+			);
+		}
+	},
 
-  // При монтировании сразу подгружаем список
-  async mounted() {
-    await this.fetchTabacoos();
-  }
+	// При монтировании сразу подгружаем список
+	async mounted() {
+		await this.fetchTabacoos();
+	}
 };
 </script>
   

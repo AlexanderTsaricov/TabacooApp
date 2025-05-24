@@ -4,16 +4,16 @@
         <div class="tasteOutBox">
             <h3 class="tasteOutBox_header">Зарандомь свой вкус!</h3>
             <div class="tasteOutBox_tasteBox">
-                <h4 class="tasteOutBox_tasteBox__header">Первый вкус</h4>
-                <p class="tasteOutBox_firstTaste"><span class="tasteOutBox_firstTaste__span">Taste </span>{{ tasteFirst }}</p>
-                <p class="tasteOutBox_firstTaste"><span class="tasteOutBox_firstTaste__span">Texture </span>{{ tekstureFirst }}</p>
-                <p class="tasteOutBox_firstTaste"><span class="tasteOutBox_firstTaste__span">Type </span>{{ typeFirst }}</p>
+                <h4 class="tasteOutBox_tasteBox__header">Taste</h4>
+                <p class="tasteOutBox_firstTaste"><span class="tasteOutBox_firstTaste__span"></span>{{ tasteFirst }}</p>
             </div>
             <div class="tasteOutBox_tasteBox">
-                <h4 class="tasteOutBox_tasteBox__header">Второй вкус</h4>
-                <p class="tasteOutBox_firstTaste"><span class="tasteOutBox_firstTaste__span">Taste </span>{{ tasteSecond }}</p>
-                <p class="tasteOutBox_firstTaste"><span class="tasteOutBox_firstTaste__span">Texture </span>{{ tekstureSecond }}</p>
-                <p class="tasteOutBox_firstTaste"><span class="tasteOutBox_firstTaste__span">Type </span>{{ typeSecond }}</p>
+                <h4 class="tasteOutBox_tasteBox__header">Teksture</h4>
+                <p class="tasteOutBox_firstTaste"><span class="tasteOutBox_firstTaste__span"></span>{{ tekstureFirst }}</p>
+            </div>
+            <div class="tasteOutBox_tasteBox">
+                <h4 class="tasteOutBox_tasteBox__header">Type</h4>
+                <p class="tasteOutBox_firstTaste"><span class="tasteOutBox_firstTaste__span"></span>{{ typeFirst }}</p>
             </div>
         </div>
         <TypesSelectMenu @update-selected-types="onUpdateSelectedTypes" />
@@ -23,17 +23,15 @@
 
 <script>
     import TypesSelectMenu from './TypesSelectMenu.vue';
-    import getRandomTasteFromTable from '../../Storage/TasteStorageScripts/getRandomTasteFromTable.js'
+    import getRandomTasteFromTable from '../../../Storage/TasteStorageScripts/getRandomTasteFromTable.js'
+    import getRandomTekstureFromTable from '../../../Storage/TekstureStorageScripts/getRandomTekstureFormTable';
     import { ref } from 'vue';
     export default {
     components: { TypesSelectMenu },
     setup() {
-        const tasteFirst = ref('Первый вкус');
+        const tasteFirst = ref('Вкус не отрандомен');
         const tekstureFirst = ref('');
         const typeFirst = ref('');
-        const tasteSecond = ref('Второй вкус');
-        const tekstureSecond = ref('');
-        const typeSecond = ref('');
         const selectedTypes = ref([]);
 
         const onUpdateSelectedTypes = (types) => {
@@ -42,32 +40,21 @@
         };
 
         const writeTasteToRandomBox = (tasteResult) => {
-            if (tasteFirst.value === 'Первый вкус') {
-                tasteFirst.value = tasteResult[0];
-                tekstureFirst.value = tasteResult[1];
-                typeFirst.value = tasteResult[2];
-            } else if (tasteSecond.value === 'Второй вкус') {
-                tasteSecond.value = tasteResult[0];
-                tekstureSecond.value = tasteResult[1];
-                typeSecond.value = tasteResult[2];
-            } else {
-                tasteFirst.value = tasteResult[0];
-                tekstureFirst.value = tasteResult[1];
-                typeFirst.value = tasteResult[2];
-                tasteSecond.value = 'Второй вкус';
-                tekstureSecond.value = '';
-                typeSecond.value = '';
-            }
+			tasteFirst.value = tasteResult[0];
+			tekstureFirst.value = tasteResult[1];
+			typeFirst.value = tasteResult[2];
         };
 
         const sendToConsoleSelectedTypes = async () => {
             let tasteRes = [];
             if (selectedTypes.value.length > 0) {
-                const randTaste =  await getRandomTasteFromTable(selectedTypes.value);
-                tasteRes = [randTaste.taste, randTaste.teksture, randTaste.type];
+                const randTaste =  await getRandomTasteFromTable();
+                const randTeksture = await getRandomTekstureFromTable(selectedTypes.value)
+                tasteRes = [randTaste.get(), randTeksture.getTeksture(), randTeksture.getType()];
             } else {
                 const randTaste = await getRandomTasteFromTable();
-                tasteRes = [randTaste.taste, randTaste.teksture, randTaste.type];
+				const randTeksture = await getRandomTekstureFromTable(selectedTypes.value)
+                tasteRes = [randTaste.get(), randTeksture.getTeksture(), randTeksture.getType()];
             }
             writeTasteToRandomBox(tasteRes);
         };
@@ -76,9 +63,6 @@
             tasteFirst,
             tekstureFirst,
             typeFirst,
-            tasteSecond,
-            tekstureSecond,
-            typeSecond,
             selectedTypes,
             onUpdateSelectedTypes,
             sendToConsoleSelectedTypes
@@ -134,9 +118,8 @@
 
 /* Параграфы внутри бокса */
 .tasteOutBox_firstTaste {
-  margin: 6px 0;
-  display: flex;
-  gap: 6px;
+	text-align: center;
+	margin: 6px 0;
 }
 
 /* Метки «Taste:», «Texture:», «Type:» */

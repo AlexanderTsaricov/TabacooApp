@@ -7,25 +7,25 @@
 </template>
 
 <script>
-import { deleteTabacoo } from '../../Storage/TabacooStorageScripts/deleteTabacooFromTable.js';
+import { deleteTabacoo } from '../../../Storage/TabacooStorageScripts/deleteTabacooFromTable.js';
 
 export default {
-  props: {
-    item: {
-      type: Object,
-      required: true
-    }
-  },
-  methods: {
-    async del() {
-      try {
-        await deleteTabacoo(this.item.name, this.item.brand);
-        this.$emit('deleted', this.item);
-      } catch (e) {
-        console.error('Ошибка удаления табака:', e);
-      }
-    }
-  }
+	props: {
+		item: {
+			type: Object,
+			required: true
+		}
+	},
+	methods: {
+		async del() {
+		try {
+			await deleteTabacoo(this.item.name, this.item.brand);
+			this.$emit('deleted', this.item);
+		} catch (e) {
+			console.error('Ошибка удаления табака:', e);
+		}
+		}
+	}
 }
 </script>
 

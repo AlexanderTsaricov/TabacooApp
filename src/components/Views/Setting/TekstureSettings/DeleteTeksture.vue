@@ -1,32 +1,36 @@
 <template>
     <form class="deleteTasteForm">
-        <h2 class="deleteTasteForm_header">Удалить вкус</h2>
-        <label for="name">Название вкуса</label>
-        <input class="deleteTasteForm_input" v-model="taste" id="taste" type="taste">
+        <h2 class="deleteTasteForm_header">Удалить текстуру</h2>
+        <label for="type">Текстура продукта</label>
+        <input class="deleteTasteForm_input" v-model="teksture" id="teksture" type="text">
+        <label for="type">Тип продукта</label>
+        <input class="deleteTasteForm_input" v-model="type" id="type" type="text">
         <button class="deleteTasteForm_submit" @click="handleDel">Submit</button>
     </form>
 </template>
 
 <script>
-    import deleteTasteFromTable from '../../../Storage/TasteStorageScripts/deleteTasteFromTable';
+import deleteTekstureFromTable from '../../../Storage/TekstureStorageScripts/deleteTekstureFromTable';
     export default {
         data() {
             return {
-            	taste: ""
+				teksture: "",
+				type: "",
             };
         },
         methods: {
             async handleDel() {
-                if (!this.taste.trim()) {
+                if (!this.teksture.trim() || !this.type.trim()) {
                     alert("Пожалуйста, заполните все поля!");
                     return;
                 }
                 try {
-                    const result = await deleteTasteFromTable(this.taste);
-                    this.taste = "";
+                    const result = await deleteTekstureFromTable(this.teksture, this.type);
+                    this.teksture = "";
+                    this.type = "type"
                     alert("Данные успешно удалены!");
                 } catch (error) {
-                    console.error('Error delete date from tastes', error);
+                    console.error('Error delete date from tekstures', error);
                 }
             }
         }
