@@ -1,12 +1,18 @@
 import requestToBD from "./requestToBD";
 import setupDatabase from './setupDatabase';
 
+/**
+ * Delete table <tableName> and try create tables
+ * tabacoo, tastes and tekstures
+ * @param {string} tableName name of table in database
+ * @returns result of clearing
+ */
 export default async function clearTabacooTable(tableName) {
     try {
         const sqlClearString = `
             drop table ${tableName};
         `
-        // Открываем (или создаём) базу
+        // open or create database
         const db = window.sqlitePlugin.openDatabase({
             name: 'tabacooDB',
             location: 'default'
