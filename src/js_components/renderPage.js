@@ -1,9 +1,12 @@
 import getPageInstanceArray from "./getPageInstanseArray";
-
+/**
+ * Render page by active button menu
+ * @param {Integer} activeButton id active button
+ */
 export default function renderPage(activeButton) {
     const instanceArray = getPageInstanceArray();
 
-    // Проверяем, существует ли инстанс для activeButton
+    // check have instance for activeButton
     if (!instanceArray[activeButton]) {
         console.error(`Инстанс для кнопки "${activeButton}" не найден.`);
         return;
@@ -11,22 +14,20 @@ export default function renderPage(activeButton) {
 
     const container = document.querySelector(".activePageBox");
 
-    // Проверяем, существует ли элемент в DOM
+    // check have element in DOM
     if (!container) {
         console.error('Элемент с классом ".activePageBox" не найден.');
         return;
     }
 
-    // Проверяем, был ли ранее смонтирован другой инстанс и размонтируем его
+    // check the previously created instance and decreate this
     if (container.__vue_app__) {
-        //console.log("Размонтирование предыдущего инстанса.");
         container.__vue_app__.unmount();
     }
 
-    // Монтируем новый инстанс
+    // Creating new instance
     try {
         instanceArray[activeButton].mount(".activePageBox");
-        //console.log(`Инстанс для "${activeButton}" успешно смонтирован.`);
     } catch (error) {
         console.error("Ошибка при монтировании инстанса:", error);
     }

@@ -1,4 +1,10 @@
-function filterTastesByString(tastesData, searchString='') {
+/**
+ * 
+ * @param {Array} tastesData Array with tastes objects 
+ * @param {String} searchString Sought string in tastes name
+ * @returns {Array} Filtred by searchString array with Tastes objects
+ */
+function filterTaste(tastesData, searchString='') {
     if (searchString.length > 0) {
         const filtredTabacoos = [];
         tastesData.forEach(taste => {
@@ -10,11 +16,6 @@ function filterTastesByString(tastesData, searchString='') {
     } else {
         return tastesData;
     }
-}
-
-function filterTaste(tastesData, searchString='') {
-    const result = filterTastesByString(tastesData, searchString);
-    return result;
 }
 
 export default filterTaste;

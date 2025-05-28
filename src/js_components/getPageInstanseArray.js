@@ -7,7 +7,10 @@ import TabacooSettingsPage from "../components/Views/Setting/TabasooSettings/Tab
 import TasteSettingsPage from "../components/Views/Setting/TasteSettings/TasteSettingsPage.vue";
 import TextureListPage from "../components/Views/TasteHead/TextureListPage/TextureListPage.vue";
 import TekstureSettingsPage from "../components/Views/Setting/TekstureSettings/TekstureSettingsPage.vue";
-
+/**
+ * 
+ * @returns instances pages
+ */
 export default function getPageInstanceArray() {
     const arrayInstance = {};
 
