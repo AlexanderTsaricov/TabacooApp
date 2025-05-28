@@ -6,6 +6,10 @@
 class Taste {
     #tastename = "";
 
+    /**
+     * 
+     * @param {string} tasteName name of taste
+     */
     constructor(tasteName) {
         if (typeof(tasteName) !== "string") {
             throw new Error("Invalid arument. Need by are string");

@@ -1,21 +1,30 @@
 class Teksture {
-    #teksture = "";
+    #texture = "";
     #type = "";
 
-    constructor (teksture, type) {
-        if (typeof(teksture) !== "string" && typeof(type) !== "string") {
+    /**
+     * 
+     * @param {string} texture name of texture
+     * @param {string} type type texture
+     */
+    constructor (texture, type) {
+        if (typeof(texture) !== "string" && typeof(type) !== "string") {
             throw new Error("Invalid arument. Need by are string");
         }
-        this.#teksture = teksture;
+        this.#texture = texture;
         this.#type = type;
     }
 
+    /**
+     * 
+     * @returns {Array} return array with [<texture name>, <texture type>]
+     */
     get() {
-        return [this.#teksture, this.#type];
+        return [this.#texture, this.#type];
     }
 
     getTeksture() {
-        return this.#teksture;
+        return this.#texture;
     }
 
     getType() {
